@@ -30,8 +30,8 @@
 #define sz(x) x.size()
 #define rep(n) for (ll i = 0; i < n; i++)
 #define repc(i, n) for (ll i = 0; i < n; i++)
-#define FOR(i, x, y) for (int i = x; i < y; i++)
 #define RANGE(start, step, stop) for (ll i = start; i < stop; i += step)
+#define FOR(i, x, y) for (int i = x; i < y; i++)
 #define DEC(i, x, y) for (int i = x; i >= y; i--)
 #define all(v) v.begin(), v.end()
 #define min3(a, b, c) min(a, min(b, c))
@@ -51,12 +51,24 @@ const int ten5 = 100000;
 const int ten6 = 1000000;
 
 
-
-
 int main()
 {
   ios::sync_with_stdio(0);
   cin.tie(0);
+
+  int n;
+  cin >> n;
+  if (n == 2 || n == 3){
+    cout << "NO SOLUTION" << endl;
+  } else {
+    RANGE(2,2,n+1){
+      cout << i << " ";
+    }
+    RANGE(1,2,n+1){
+      cout << i << " ";
+    }
+  }
+  
 }
 
 // Always consider overflowing

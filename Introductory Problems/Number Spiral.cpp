@@ -52,11 +52,45 @@ const int ten6 = 1000000;
 
 
 
+void solve(int x, int y){
+  ll big = max(x,y);
+  ll small = min(x,y);
+
+  ll repeat = (big-1)/2;
+  ll ones = (big)/2;
+
+  ll val = 4*(repeat + 1)*repeat - repeat + ones + 1;
+
+  if (y > x){
+    if (big % 2 == 0){
+    val = val + big*2 - 2;
+    } else {
+      val = val - big*2 + 2;
+    }
+  }
+  
+  if(big % 2 == int(y > x)){
+    val += small - 1;
+  } else {
+    val -= small - 1;
+  }
+
+  cout << val << endl;
+}
 
 int main()
 {
   ios::sync_with_stdio(0);
   cin.tie(0);
+
+  int t;
+  cin >> t;
+  ll x,y;
+  rep(t){
+    cin >> y >> x;
+    solve(x,y);
+  }
+  
 }
 
 // Always consider overflowing

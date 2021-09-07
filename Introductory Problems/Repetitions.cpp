@@ -31,7 +31,6 @@
 #define rep(n) for (ll i = 0; i < n; i++)
 #define repc(i, n) for (ll i = 0; i < n; i++)
 #define FOR(i, x, y) for (int i = x; i < y; i++)
-#define RANGE(start, step, stop) for (ll i = start; i < stop; i += step)
 #define DEC(i, x, y) for (int i = x; i >= y; i--)
 #define all(v) v.begin(), v.end()
 #define min3(a, b, c) min(a, min(b, c))
@@ -57,6 +56,16 @@ int main()
 {
   ios::sync_with_stdio(0);
   cin.tie(0);
-}
 
-// Always consider overflowing
+  int best_rep = 1;
+  string input;
+  cin >> input;
+
+  int curr_rep = 1;
+  FOR(i,1,sz(input)){
+    if (input[i] == input[i-1]){curr_rep++;}
+    else{curr_rep = 1;}
+    best_rep = max(curr_rep,best_rep);
+  }
+  cout << best_rep;
+}
