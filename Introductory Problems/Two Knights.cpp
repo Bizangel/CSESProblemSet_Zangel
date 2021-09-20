@@ -51,12 +51,53 @@ const int ten5 = 100000;
 const int ten6 = 1000000;
 
 
+ll recsolve(ll k){
+  if(k == 1){
+    cout << 0 << endl;
+    return 0;
+  } else if (k == 2){
+    cout << 0 << endl << 6 << endl;
+    return 6;
+  } 
+
+  ll count = 0;
+  // bottom side
+  ll poss = (k-1)*(k-1);
+  rep(k-1){
+    int cancel = 0;
+    if (i - 1 >= 0){
+      cancel++;
+    }
+    if(i - 2 >= 0){
+      cancel++;
+    }
+    if (i + 1 < k - 1){
+      cancel++;
+    }
+    if(i + 2 < k - 1){
+      cancel++;
+    }
+    // cout << cancel << endl;
+    count += (poss - cancel)*2;
+  }
+  
+  count += ((k-1)*(k-1)) - 2; // from corner
+  count += (2*k - 1)*(k-1) - 2;
+  
+  ll result = recsolve(k-1) + count;
+  cout << result << endl;
+  return result;
+}
 
 
 int main()
 {
   ios::sync_with_stdio(0);
   cin.tie(0);
+
+  int n;
+  cin >> n;
+  recsolve(n);
 }
 
-// Always consider overflowing (Don't return inside main, because that is considered as runtime error (returning diff than 0))
+// Always consider overflowing

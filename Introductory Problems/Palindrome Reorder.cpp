@@ -51,12 +51,51 @@ const int ten5 = 100000;
 const int ten6 = 1000000;
 
 
-
+int a[26];
 
 int main()
 {
   ios::sync_with_stdio(0);
   cin.tie(0);
+
+  string x;
+  cin >> x;
+  int val;
+  rep(int(x.length())){
+    val = int(char(x[i]) - 'A');
+    a[val]++;
+  }
+  
+  string palindrome = "";
+  bool exception = int(x.length()) % 2 == 1; // allow one exception if odd
+  bool nosol = false;
+  int exception_char = -1;
+
+  rep(26){
+    if (a[i] % 2 == 1 && !exception){
+      cout << "NO SOLUTION";
+      nosol = true;
+      break;
+    } else if (a[i] % 2 == 1 && exception_char){
+      exception = false;
+      exception_char = i;
+    } else {
+      palindrome += string(a[i]/2, i + 'A');
+    }
+  } 
+  
+  if(!nosol){
+    string returnPali = palindrome;
+    reverse(returnPali.begin(),returnPali.end());
+    if (exception_char != -1){
+      returnPali = palindrome + string(a[exception_char],exception_char + 'A') + returnPali;
+    } else {
+      returnPali = palindrome + returnPali;
+    }
+    
+    cout << returnPali;
+  } 
+  
 }
 
 // Always consider overflowing (Don't return inside main, because that is considered as runtime error (returning diff than 0))

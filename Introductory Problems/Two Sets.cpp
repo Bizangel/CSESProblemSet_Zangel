@@ -50,13 +50,72 @@ const int inf = 1e9 + 7;
 const int ten5 = 100000;
 const int ten6 = 1000000;
 
+int a[ten6];
+int b[ten6];
+
+void solve(ll n){
+  if (n*(n+1)/2 % 2 == 1){
+    cout << "NO" << endl;
+  }
+  else {
+    cout << "YES" << endl;
+    ll target_sum = n*(n+1)/4;
+
+    // get sum of numbers up to there
+    ll curr_sum = 0;
+    ll finisher;
+    ll end_value;
+
+    ll alen = 0;
+    DEC(i, n, 0){
+      // cout << i << endl;
+      curr_sum += i;
+      
+      if (curr_sum > target_sum){
+        curr_sum -= i; // backtrack
+        finisher = target_sum - curr_sum; // curr_sum + finisher = target_sum
+        end_value = i;
+        alen++;
+        a[n - i] = finisher;
+        break;
+      }
+      
+      alen++;
+      a[n - i] = i;
+      if(curr_sum == target_sum){ // consider equal case
+        end_value = i;
+        finisher = i;
+        break;
+      }
+    }
+
+    // print found
+    cout << alen <<endl;
+    rep(n - end_value + 1){
+      cout << a[i] << " ";
+    }
 
 
+    cout << endl << n - alen << endl;
+    FOR(i,1,end_value + 1){
+      if (i != finisher){
+        cout << i << " ";
+      }
+    }
+  }
+
+}
 
 int main()
 {
   ios::sync_with_stdio(0);
   cin.tie(0);
+
+  ll n;
+  cin >> n; 
+  solve(n);
+
+
 }
 
-// Always consider overflowing (Don't return inside main, because that is considered as runtime error (returning diff than 0))
+// Always consider overflowing

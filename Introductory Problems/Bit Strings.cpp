@@ -50,13 +50,59 @@ const int inf = 1e9 + 7;
 const int ten5 = 100000;
 const int ten6 = 1000000;
 
+bool* decimaltobinary(long long n, int &size) {
+	size=0;
+	long long n_copy =n;
+	while (true) {
+		size += 1;
+		n_copy = n_copy / 2;
+		
+		if (n_copy == 0) {
+			break;
+		}
+	}
+	bool* binaryrep = new bool[size];
+	int i = 0;
+	while (n > 0) {
+		binaryrep[i] = n % 2;
+		n = n / 2;
+		i++;
+  }
+	return binaryrep;
+}
 
+long long squareandmultiply(long long base, long long power, long long mod)
+{
+	int size_bits;
+	bool* y_k = decimaltobinary(power, size_bits);
+
+	long long w = 1;
+	for (int i = size_bits - 1; i > -1; i--) {
+		w = w * w;
+		w %= mod;
+		
+		if (y_k[i]) {
+			w = w * base;
+			w %= mod;
+		}
+	}
+	if (w < 0) {
+		return w + mod;
+	}
+
+  delete[] y_k;
+	return w;
+}
 
 
 int main()
 {
   ios::sync_with_stdio(0);
   cin.tie(0);
+
+  ll n;
+  cin >> n;
+  cout << squareandmultiply(2,n,inf);
 }
 
-// Always consider overflowing (Don't return inside main, because that is considered as runtime error (returning diff than 0))
+// Always consider overflowing

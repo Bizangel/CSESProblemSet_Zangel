@@ -57,6 +57,28 @@ int main()
 {
   ios::sync_with_stdio(0);
   cin.tie(0);
+
+  // Simple linear system, solve by hand
+  ll t,a,b,x,y;
+
+  cin >> t;
+  
+  rep(t){
+    cin >> a >> b;
+    
+    if((2*b - a) % 3 == 0){
+      y = (2*b - a)/3;
+      x = b - 2*y;
+      if (x > - 1 && y > -1){
+        cout << "YES" << endl;
+      }
+      else {
+        cout << "NO" << endl;
+      }
+    } else {
+      cout << "NO" << endl;
+    }
+  }
 }
 
-// Always consider overflowing (Don't return inside main, because that is considered as runtime error (returning diff than 0))
+// Always consider overflowing

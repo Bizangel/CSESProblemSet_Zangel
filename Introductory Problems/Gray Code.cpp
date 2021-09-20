@@ -50,13 +50,43 @@ const int inf = 1e9 + 7;
 const int ten5 = 100000;
 const int ten6 = 1000000;
 
+vector<string> a[65536]; // 2^16
 
 
+vector<string> recsolve(int n){
+  if(n == 1){
+    vector<string> a = {"0","1"};
+    return a;
+  } else {
+    vector<string> a = recsolve(n - 1);
+    vector<string> new_a(a.size()*2,"");  // duplicate size;
+    rep(a.size()){
+      new_a[i] = a[i] + "0";
+    }
+    rep(a.size()){
+      new_a[i + a.size()] = a[a.size() - i - 1] + "1";
+    }
+    return new_a;
+  } 
+}
 
+void solve(int n){
+  recsolve(2);
+}
 int main()
 {
   ios::sync_with_stdio(0);
   cin.tie(0);
+
+  int n;
+  cin >> n;
+  vector<string> output = recsolve(n);
+
+  rep(output.size()){
+    cout << output[i] << endl;
+  }
+
+
 }
 
 // Always consider overflowing (Don't return inside main, because that is considered as runtime error (returning diff than 0))

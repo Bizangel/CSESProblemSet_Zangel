@@ -57,6 +57,28 @@ int main()
 {
   ios::sync_with_stdio(0);
   cin.tie(0);
+  ll n;
+  cin >> n;
+  ll val = 5;
+  if (n < 5){
+    cout << 0;
+  } else {
+    
+  while(true){
+    val *= 5;
+    if (val > n){
+      val /= 5;
+      break;
+    }
+  } 
+  ll count = 0;
+  while(val >= 5){
+    count += n/val;
+    val /= 5;
+  }
+  cout << count;
+  } 
+ 
 }
 
-// Always consider overflowing (Don't return inside main, because that is considered as runtime error (returning diff than 0))
+// Always consider overflowing
