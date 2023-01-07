@@ -52,12 +52,13 @@ const int ten6 = 1000000;
 
 const vector<char> directions = {'U', 'D', 'L', 'R'};
 
-const int bsize = 5;
+const int bsize = 4;
 
-ll recsolve(ii prev, vector<ii> travelled, string &pattern)
+ll recsolve(ii prev, vector<ii> &travelled, string &pattern)
 {
   if (sz(travelled) == bsize * bsize)
   {
+    travelled.pop_back(); // unconsider this one
     return prev == ii(0, bsize - 1) ? 1 : 0;
   }
   else
@@ -75,9 +76,9 @@ ll recsolve(ii prev, vector<ii> travelled, string &pattern)
       ii moved(prev.first, prev.second - 1);
       if (find(travelled.begin(), travelled.end(), moved) == travelled.end()) // don't repeat
       {
-        vii copytravel(travelled);
-        copytravel.push_back(moved);
-        val += recsolve(moved, copytravel, pattern);
+        // vii copytravel(travelled);
+        travelled.push_back(moved);
+        val += recsolve(moved, travelled, pattern);
       }
     }
 
@@ -87,9 +88,9 @@ ll recsolve(ii prev, vector<ii> travelled, string &pattern)
       ii moved(prev.first, prev.second + 1);
       if (find(travelled.begin(), travelled.end(), moved) == travelled.end()) // don't repeat
       {
-        vii copytravel(travelled);
-        copytravel.push_back(moved);
-        val += recsolve(moved, copytravel, pattern);
+        // vii copytravel(travelled);
+        travelled.push_back(moved);
+        val += recsolve(moved, travelled, pattern);
       }
     }
 
@@ -99,9 +100,9 @@ ll recsolve(ii prev, vector<ii> travelled, string &pattern)
       ii moved(prev.first - 1, prev.second);
       if (find(travelled.begin(), travelled.end(), moved) == travelled.end()) // don't repeat
       {
-        vii copytravel(travelled);
-        copytravel.push_back(moved);
-        val += recsolve(moved, copytravel, pattern);
+        // vii copytravel(travelled);
+        travelled.push_back(moved);
+        val += recsolve(moved, travelled, pattern);
       }
     }
 
@@ -111,11 +112,13 @@ ll recsolve(ii prev, vector<ii> travelled, string &pattern)
       ii moved(prev.first + 1, prev.second);
       if (find(travelled.begin(), travelled.end(), moved) == travelled.end()) // don't repeat
       {
-        vii copytravel(travelled);
-        copytravel.push_back(moved);
-        val += recsolve(moved, copytravel, pattern);
+        // vii copytravel(travelled);
+        travelled.push_back(moved);
+        val += recsolve(moved, travelled, pattern);
       }
     }
+
+    travelled.pop_back(); // remove last
 
     return val;
   }
@@ -133,8 +136,6 @@ int main()
   string pattern;
   cin >> pattern;
 
-  // cout << pattern;
-  // cout << "hello" << endl;
   ll x = recsolve(ii(0, 0), travelled, pattern);
 
   cout << x << endl;
